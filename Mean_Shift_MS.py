@@ -123,10 +123,10 @@ def sklearn_mean_shift(X_tab):   #sklearn faster method using developed function
     labels_unique = np.unique(labels)
     n_clusters_ = len(labels_unique)
 
-    print("number of estimated clusters : %d" % n_clusters_)
+    # print("number of estimated clusters : %d" % n_clusters_)
 
     # Plot result
-    import matplotlib.pyplot as plt
+    # import matplotlib.pyplot as plt
     from itertools import cycle
 
     plt.figure(1)
@@ -144,17 +144,17 @@ def sklearn_mean_shift(X_tab):   #sklearn faster method using developed function
     print("centroid sklearn", cluster_center[0], cluster_center[1])
     a = cluster_center[0]
     b = cluster_center[1]
-    return a, b
+    return a, b     # returns final coordinates of sklearn cluster center
 
 
 # sklearn_mean_shift(X_tab)    #uncoment to run better version of mean shift
-a, b = sklearn_mean_shift(X_tab)
+a, b = sklearn_mean_shift(X_tab)    # coordinates of sklearn cluster center
 
 
 # Errors between two methods
-c = Y[n-1][0, 0]
-d = Y[n-1][0, 1]
-error = [abs(a-c),abs(b-d)]
-print("x_err: ",error[0], "y_err: ", error[1])
+c = Y[n-1][0, 0]                        # x coordinate of iteration cluster center
+d = Y[n-1][0, 1]                        # y coordinate of iteration cluster center
+error = [abs(a-c),abs(b-d)]             # error table
+print(" x_err: ",error[0],"\n", "y_err: ", error[1])
 
 print("done")

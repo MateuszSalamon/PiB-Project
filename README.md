@@ -18,8 +18,11 @@ Na początek należy przekopiować treść pliku pythonowego na własny komputer
 
 Należy: 
 *1. Zainstalować potrzebne biblioteki
+
 *2. Przekopiować kod z pliku Mean_Shift.py
+
 *3. Uruchomić kod w interpreterze
+
 *4. Oglądać i zamykać pojawiające się okna
 
 

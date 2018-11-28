@@ -17,6 +17,7 @@ Na początek należy przekopiować treść pliku pythonowego na własny komputer
 ### Installing
 
 Należy: 
+
 *1. Zainstalować potrzebne biblioteki
 
 *2. Przekopiować kod z pliku Mean_Shift.py

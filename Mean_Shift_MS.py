@@ -4,12 +4,13 @@ import matplotlib.pylab as pylab
 import numpy as np
 from sklearn.datasets.samples_generator import make_blobs
 import sklearn
-from sklearn import cluster
+from sklearn.cluster import estimate_bandwidth
 
 
 pylab.rcParams['figure.figsize'] = 6, 6
 
 # Data cluster  = X_tab
+n_samples = 100     # number of samples
 
 centers = [[1, 1], [-1, -1], [1, -1]]
 # centers = 3
@@ -19,7 +20,7 @@ plt.plot(X_tab[:, 0], X_tab[:, 1], 'bo', markersize=10)
 # plt.show() # shows graph of original data cluster
 
 # Sklearn method of sigma estimation
-# a = sklearn.cluster.estimate_bandwidth(X_tab, quantile=0.3, n_samples=None, random_state=0, n_jobs=None)
+# a = sklearn.cluster.estimate_bandwidth(X_tab, quantile=0.2, n_samples=500, random_state=0, n_jobs=None)
 # sigma = a
 
 
@@ -43,7 +44,7 @@ def gaussian_krnl(x, sigma):     # Gaussian Kernel
 
 
 search_distance = 6 # Mean Shift parameter 1 / Diameter of the search circle
-sigma = 4           # Mean Shift parameter 2 / Standard deviation from gaussian kernel
+sigma = estimate_bandwidth(X_tab, quantile=0.2, n_samples=500)  # Standard deviation from gaussian kernel
 
 
 X = np.copy(X_tab)  # X is an array copy of original points / X_tab
@@ -80,7 +81,7 @@ font = {'family': 'serif',
 figure = plt.figure(1)
 figure.set_size_inches((12, 9))
 plt.subplot(n + 2, 1, 1)
-plt.title( label ='Original', fontdict=font)
+plt.title(label='Original', fontdict=font)
 plt.plot(X_tab[:,0], X_tab[:,1], 'o')
 
 # Numerical coordinates of the first element of the last iteration / for debugging
@@ -96,6 +97,7 @@ plt.show()
 
 plt.plot(X_tab[:,0], X_tab[:,1], 'o')
 plt.plot(Y[i][:,0], Y[i][:,1], 'ro')
+print("centroid iteration",Y[n-1][0,0],Y[n-1][0,1])
 plt.show()
 
 ###################################################################################
@@ -111,7 +113,7 @@ def sklearn_mean_shift(X_tab):   #sklearn faster method using developed function
     # Compute clustering with MeanShift
 
     # The following bandwidth can be automatically detected using
-    bandwidth = estimate_bandwidth(X, quantile=0.2, n_samples=100)
+    # bandwidth = estimate_bandwidth(X_tab, quantile=0.2, n_samples=500)
 
     ms = MeanShift(bandwidth=100, bin_seeding=True)
     ms.fit(X_tab)
@@ -139,8 +141,20 @@ def sklearn_mean_shift(X_tab):   #sklearn faster method using developed function
                  markeredgecolor='k', markersize=14)
     plt.title('Estimated number of clusters: %d' % n_clusters_)
     plt.show()
-    return 0
+    print("centroid sklearn", cluster_center[0], cluster_center[1])
+    a = cluster_center[0]
+    b = cluster_center[1]
+    return a, b
 
-sklearn_mean_shift(X_tab)    #uncoment to run better version of mean shift
+
+# sklearn_mean_shift(X_tab)    #uncoment to run better version of mean shift
+a, b = sklearn_mean_shift(X_tab)
+
+
+# Errors between two methods
+c = Y[n-1][0, 0]
+d = Y[n-1][0, 1]
+error = [abs(a-c),abs(b-d)]
+print("x_err: ",error[0], "y_err: ", error[1])
 
 print("done")

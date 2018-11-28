@@ -16,8 +16,9 @@ centers = [[1, 1], [-1, -1], [1, -1]]
 # centers = 3
 X_tab, Y_tab = make_blobs(n_samples=100, n_features=2, centers=centers, cluster_std=1.9)
 print(X_tab.shape)
+plt.title(label='Original data cluster')
 plt.plot(X_tab[:, 0], X_tab[:, 1], 'bo', markersize=10)
-# plt.show() # shows graph of original data cluster
+plt.show() # shows graph of original data cluster
 
 # Sklearn method of sigma estimation
 # a = sklearn.cluster.estimate_bandwidth(X_tab, quantile=0.2, n_samples=500, random_state=0, n_jobs=None)
@@ -95,6 +96,7 @@ for i in range(n):
     plt.plot(Y[i][:,0], Y[i][:,1], 'ro')
 plt.show()
 
+plt.title(label='Last iteration')
 plt.plot(X_tab[:,0], X_tab[:,1], 'o')
 plt.plot(Y[i][:,0], Y[i][:,1], 'ro')
 print("centroid iteration",Y[n-1][0,0],Y[n-1][0,1])
@@ -139,7 +141,7 @@ def sklearn_mean_shift(X_tab):   #sklearn faster method using developed function
         plt.plot(X_tab[my_members, 0], X_tab[my_members, 1], col + '.')
         plt.plot(cluster_center[0], cluster_center[1], 'o', markerfacecolor=col,
                  markeredgecolor='k', markersize=14)
-    plt.title('Estimated number of clusters: %d' % n_clusters_)
+    plt.title('sklearn Estimated number of clusters: %d' % n_clusters_)
     plt.show()
     print("centroid sklearn", cluster_center[0], cluster_center[1])
     a = cluster_center[0]

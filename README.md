@@ -27,9 +27,6 @@ Należy:
 
 * Pycharm
 
-## Contributing
-
-
 ## Authors
 
 * **Mateusz Salamon** - *Całość pracy* - [MateuszSalamon](https://github.com/MateuszSalamon)

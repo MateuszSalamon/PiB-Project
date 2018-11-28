@@ -8,10 +8,16 @@ Wersji iterowanej oraz wezsji z biblioteki sklearn
 Na początek należy przekopiować treść pliku pythonowego na własny komputer i użyć interpretera 
 
 ### Prerequisites
+Program:
 
 *Pycharm
+
+Biblioteki:
+
 *sklearn
+
 *numpy
+
 *matplotlib
 
 ### Installing
